@@ -24,18 +24,17 @@ async def say_hi(name: str):
 async def env(req: Request):
     env = req.scope["env"]
     message = f"Here is an example of getting an environment variable: {env.MESSAGE}"
-    return {"message": message,"env": env}
+    return {"message": message}
 @app.get("/db")
-async def db(env):
+async def db(req: Request):
+    env = req.scope["env"]
     query = """
         SELECT quote, author
         FROM qtable
         ORDER BY RANDOM()
         LIMIT 1;
         """
-    results = env.DB.prepare(query).all()
-    data = results.results[0]
-    return {"data": data}
+    return {"data": env.DB}
 
 class Default(WorkerEntrypoint):
     async def fetch(self, request):

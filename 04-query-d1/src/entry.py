@@ -13,7 +13,7 @@ class Default(WorkerEntrypoint):
         data = results.results[0]
 
         env = request.scope["env"]
-        msg = await env.MESSAGE
+        msg = env.MESSAGE
 
         # Return a JSON response
         return Response.json({"data": data,"env":msg})

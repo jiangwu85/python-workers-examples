@@ -9,6 +9,9 @@
 	"ai": {
 		"binding": "AI"
 	},
+	"vars": {
+		"MESSAGE": "My env var"
+	},
 	"d1_databases": [
 		{
 			"binding": "DB", // i.e. available in your Worker on env.DB

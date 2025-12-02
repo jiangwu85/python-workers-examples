@@ -3,15 +3,16 @@ from workers import WorkerEntrypoint, Response
 
 class Default(WorkerEntrypoint):
     async def fetch(self, request):
-        import asgi
         query = """
         SELECT quote, author
         FROM qtable
         ORDER BY RANDOM()
         LIMIT 1;
         """
-        results = self.env.DB.prepare(query).all()
+        results = await self.env.DB.prepare(query).all()
         data = results.results[0]
+
+        msg = await self.env.MESSAGE
+
         # Return a JSON response
-        print( Response.json(data))
-        return await asgi.fetch(app, request.js_object, self.env)
+        return Response.json({"data": data,"env":msg})

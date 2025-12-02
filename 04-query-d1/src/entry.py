@@ -10,7 +10,7 @@ class Default(WorkerEntrypoint):
         ORDER BY RANDOM()
         LIMIT 1;
         """
-        results = await self.env.DB.prepare(query).all()
+        results = self.env.DB.prepare(query).all()
         data = results.results[0]
         # Return a JSON response
         print( Response.json(data))

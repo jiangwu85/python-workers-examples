@@ -12,7 +12,8 @@ class Default(WorkerEntrypoint):
         results = await self.env.DB.prepare(query).all()
         data = results.results[0]
 
-        msg = await self.env.MESSAGE
+        env = request.scope["env"]
+        msg = await env.MESSAGE
 
         # Return a JSON response
         return Response.json({"data": data,"env":msg})

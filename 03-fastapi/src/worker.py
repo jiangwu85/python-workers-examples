@@ -25,9 +25,6 @@ async def env(req: Request):
     env = req.scope["env"]
     message = f"Here is an example of getting an environment variable: {env.MESSAGE}"
     return {"message": message}
-
-
-
 @app.get("/db")
 async def db(env):
     query = """
